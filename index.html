@@ -38,6 +38,55 @@
      <textarea height="5" width="50"></textarea><br>
      <button>Submit</button>
      </form>
-  
+    
+     <?php
+// (A) "SETTINGS"
+// FIXED NUMBERS FOR THIS TUTORIAL
+$uid = 999; // user id
+$fid = 1;   // feedback id
+
+// (B) LOAD FEEDBACK LIBRARY
+require "2-feedback-lib.php";
+
+// (C) OUTPUT HTML ?>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Feedback Form</title>
+    <link rel="stylesheet" href="4-feedback-page.css"/>
+  </head>
+  <body>
+    <?php
+    // (C1) SAVE USER FEEDBACK
+    if (count($_POST)>0) {
+      echo $FEED->saveuser($uid, $fid, $_POST["ans"])
+        ? "OK" : $FEED->error;
+    }
+
+    // (C2) SHOW FEEDBACK QUESTIONS
+    else { $questions = $FEED->get($fid); ?>
+    <form method="post" class="feed-form">
+      <?php foreach ($questions as $qid=>$q) { ?>
+      <!-- (C2-1) QUESTION -->
+      <div class="feed-qn"><?=$q["question_text"]?></div>
+
+      <!-- (C2-2) ANSWER -->
+      <?php if ($q["question_type"]=="R") { ?>
+      <div class="feed-r">
+        <?php for ($i=1; $i<=5; $i++) { ?>
+        <input type="radio" name="ans[<?=$qid?>]" value="<?=$i?>"<?=$i==3?" checked":""?>/>
+        <?php } ?>
+      </div>
+      <?php } else { ?>
+      <input type="text" name="ans[<?=$qid?>]" class="feed-o" required/>
+      <?php } ?>
+      <?php } ?>
+
+      <input type="submit" value="Save" class="feed-go"/>
+    </form>
+    <?php } ?>
+  </body>
+</html>
+
  
 </body>

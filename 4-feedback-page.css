@@ -1,0 +1,30 @@
+* {
+  font-family: arial, sans-serif;
+  box-sizing: border-box;
+}
+.feed-form {
+  max-width: 500px;
+  padding: 20px;
+  border: 1px solid #ddd;
+  background: #f2f2f2;
+}
+.feed-qn {
+  padding: 10px 0;
+  font-weight: 700;
+}
+.feed-r, .feed-o {
+  width: 100%;
+  margin-bottom: 20px;
+}
+.feed-o {
+  padding: 10px;
+  border: 0;
+}
+.feed-go {
+  padding: 10px 20px;
+  font-weight: 700;
+  border: 0;
+  color: #fff;
+  background: #006aee;
+  cursor: pointer;
+}
